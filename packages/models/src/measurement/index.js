@@ -40,7 +40,11 @@ const getMeasurements = async function getMeasurements (sensorId, limit = 1) {
 };
 
 const insertMeasurements = async function insertMeasurements (measurements) {
-  return db.insert(measurementTable).values(measurements);
+  const transformedMeasurements = measurements.map(({ sensor_id, ...rest }) => ({
+    sensorId: sensor_id, // Rename sensor_id to sensorId
+    ...rest, // Keep the rest of the object properties unchanged
+  }));
+  return db.insert(measurementTable).values(transformedMeasurements);
 };
 
 module.exports = {

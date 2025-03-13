@@ -254,8 +254,8 @@ const saveMeasurements = async function saveMeasurements (device, measurements) 
     return Promise.reject(new Error('Array expected'));
   }
 
-  const sensorIds = this.sensorIds(),
-    lastMeasurements = {};
+  const sensorIds = device.sensors.map(sensor => sensor.id),
+  lastMeasurements = {};
 
   // TODO: refactor
   // find new lastMeasurements
